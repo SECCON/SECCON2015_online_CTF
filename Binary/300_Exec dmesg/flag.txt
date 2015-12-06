@@ -1,0 +1,2 @@
+SECCON{elf32-i386}
+

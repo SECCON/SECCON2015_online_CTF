@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>MD5 collision fight</title>
+		<script type="text/javascript" src="jquery-2.1.3.min.js"></script>
+		<script type="text/javascript">
+			
+			var CGIpath = "cg.cgi";
+			var RANKnow = 0;
+			
+			var submitcode_flag = 0;
+			function print_submitcode()
+			{
+				data  = '';
+				if(submitcode_flag == 0){
+					data += '<form action="' + CGIpath + '" enctype="multipart/form-data" method="post">';
+					data += '<input type="hidden" name="s" value="post_files">';
+					data += '<table border="0">';
+					data += '<tr>';
+					data += '<td>FileA:</td><td><input type="file" name="FileA"></td>';
+					data += '</tr>';
+					data += '<tr>';
+					data += '<td>FileB:</td><td><input type="file" name="FileB"></td>';
+					data += '</tr>';
+					data += '<tr>';
+					data += '<td>TeamName:</td><td><input type="text" name="Team"></td>';
+					data += '</tr>';
+					data += '<tr><td></td><td><hr></td></tr>';
+					data += '<tr>';
+					data += '<td></td><td><input type="submit" value="Submit"></td>';
+					data += '</tr>';
+					data += '</table>';
+					data += '</form>';
+					submitcode_flag = 1;
+				}else{
+					submitcode_flag = 0;
+				}
+				document.getElementById("submitcode").innerHTML = data;
+				return false;
+			}
+			
+			function print_one_table(i, xxx, bflag)
+			{
+				data = "";
+				v = xxx.split("@");
+				data += '<form action="' + CGIpath + '" enctype="multipart/form-data" method="post">';
+				data += '<input type="hidden" name="s" value="break_it">';
+				data += '<input type="hidden" name="n" value="' + String(parseInt(v[0], 10)) + '">';
+				data += '<table border="0" style="">';
+				data += '<tr>';
+				data += '<td>' + (i+1) + '.</td><td style="width:50px;text-align:right">ID:</td>';
+				data += '<td colspan="2">' + v[0] + '</td>';
+				data += '</tr>';
+				data += '<tr>';
+				data += '<td></td><td style="width:50px;text-align:right">CodeSize:</td>';
+				data += '<td colspan="2">';
+				data += String(parseInt(v[1], 10) + parseInt(v[2], 10)) + ' = ' + v[1] + ' + ' + v[2] + ' (bytes)</td>';
+				data += '</tr>';
+				data += '<tr>';
+				data += '<td></td><td style="width:50px;text-align:right;vertical-align:baseline">';
+				data += 'MD5:</td>';
+				data += '<td colspan="2" style="word-break: break-all;width:400px;">' + v[3] + '</td>';
+				data += '</tr>';
+				data += '<tr>';
+				data += '<td></td><td style="width:50px;text-align:right;vertical-align:baseline">';
+				data += 'TeamName:</td>';
+				data += '<td colspan="2" style="word-break: break-all;width:400px;">' + v[4] + ' (Base64)</td>';
+				data += '</tr>';
+				data += '<tr>';
+				data += '<td></td>';
+				data += '<td style="width:50px;text-align:right">Status:</td>';
+				if(v[5] == "0"){
+					data += '<td style="color:#0000ff;">Safe</td><td align="right"></td>';
+				}else{
+					data += '<td style="color:#ff0000;">Danger(' + v[5] + ')</td><td align="right"></td>';
+				}
+				data += '</tr>';
+				data += '<tr>';
+				data += '<td></td><td></td><td colspan="2"><hr></td>';
+				data += '</tr>';
+				data += '<tr>';
+				data += '<td></td>';
+				data += '<td style="width:50px;text-align:right">File:</td><td><input type="file" name="FileC"></td>';
+				data += '<td align="right"><input type="submit" value=" Collision Check "></td>';
+				data += '</tr>';
+				data += '</table>';
+				data += '</form>' + '<br>';
+				return data;
+			}
+
+			function check_collision(cid)
+			{
+			}
+
+			function print_ranking(res)
+			{
+				li = res.split("\x0a");
+				al = parseInt(li[0], 10);
+				li.shift();
+				data = '<h3><a href="#" onClick="javascript:ranking()" style="text-decoration:none; color:#000000;">Ranking</a></h3>';
+				st = RANKnow;
+				for(i=0; i < li.length; i++){
+					data += print_one_table(st, li[i], 1);
+					st += 1;
+				}
+				data += '<div>';
+				for(i=0; i < al; i+=10){
+					if(i <= RANKnow && RANKnow < (i+10)){
+						data += '[' + String(i+1) + '-] ';
+					}else{
+						data += '<a href="#" onClick="javascript:chgRANKnow(' + String(i) + ')">';
+						data += '[' + String(i+1) + '-]</a> ';
+					}
+				}
+				data += '</div>';
+				document.getElementById("ranking").innerHTML = data;
+			}
+			
+			function chgRANKnow(n)
+			{
+				RANKnow = n;
+				ranking();
+			}
+			
+			function ranking()
+			{
+				$.ajax({
+					url: CGIpath, type: "POST", dataType: "text",
+					data: { "s": "get_ranking", "n": String(RANKnow) },
+					cache: false,
+					success: function(res, textStatus){
+						print_ranking(res);
+					}
+				});
+			}
+			
+			function print_breakit(res, r)
+			{
+				li = res.split("\x0a");
+				cID = li[0].split("@")[0];
+				cID = parseInt(cID, 10);
+				data  = '<h3>Breaking</h3>';
+				data += print_one_table(r, li[0], 0);
+				document.getElementById("ranking").innerHTML = data;
+			}
+
+			var breakit_flag = 0;
+			function breakit(n, r) // n=ID, r=rank
+			{
+				if(breakit_flag == 0){
+					$.ajax({
+						url: CGIpath, type: "POST", dataType: "text",
+						data: { "s": "load_break_it", "n": String(n) },
+						cache: false,
+						success: function(res, textStatus){
+							alert(res);
+							print_breakit(res, r);
+							document.getElementById("bi").value = " Return ";
+						}
+					});
+					breakit_flag = 1;
+				}else{
+					ranking();
+					logs_flag = 0;
+					breakit_flag = 0;
+				}
+			}
+			
+			function reload_all()
+			{
+				location.reload(true);
+			}
+			
+			function help()
+			{
+				data  = "";
+				data += "<ol>";
+				data += "<li>Your team can upload different 2 files of same MD5.";
+				data += "<li>After your team uploads your files, you will not be allowed to upload again for 1 hour.";
+				data += "<li>All files will be ranked by its code size.";
+				data += "<li>The Team which 1st files uploads, gain 500 points, when the CTF finished.";
+				data += "</ol>";
+				document.getElementById("ranking").innerHTML = data;
+			}
+		</script>
+		<style>
+			table {
+				font-family: monospace;
+			}
+		</style>
+	</head>
+	<body onload="javascript:ranking()">
+		<div style="width:650px;">
+			<h2><a href="#" onClick="javascript:reload_all()" style="text-decoration:none; color:#000000;">MD5 collision fight</a> <a href="#" onClick="javascript:help()" style="font-size:50%">/?</a></h2>
+			<p><a href="#" onClick="javascript:print_submitcode()">Submit your files</a></p>
+			<div id="submitcode"></div>
+			<hr>
+			<div id="ranking"></div>
+			<br>
+			<div id="copyright" style="text-align:right">Chrome or Firefox Only<hr>2015 SECCON</div>
+		</div>
+	</body>
+</html>

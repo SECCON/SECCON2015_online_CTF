@@ -1,0 +1,10 @@
+The key is stored in the application, but you will need to hack the server.
+( *Do not use your real mail address.)
+app-release-apk.pwn.seccon.jp-v1.3.apk
+
+
+キーはアプリケーションの中にある。しかしサーバをHackしなければ手に入らないだろう。
+（登録情報に他人に知られたくないメールアドレスは使用しないでください）
+app-release-apk.pwn.seccon.jp-v1.3.apk
+
+

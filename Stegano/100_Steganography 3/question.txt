@@ -1,0 +1,9 @@
+We can get desktop capture!
+Read the secret message.
+desktop_capture.png
+
+デスクトップのキャプチャに成功した！
+秘密のメッセージを読み取ってほしい
+desktop_capture.png
+
+

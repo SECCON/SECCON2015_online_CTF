@@ -1,0 +1,3 @@
+$ cp pq.cgi /var/www/pq.cgi.txt
+http://pailler.quals.seccon.jp/pq.cgi.txt
+http://pailler.quals.seccon.jp/cgi-bin/pq.cgi

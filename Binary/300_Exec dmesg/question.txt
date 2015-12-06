@@ -1,0 +1,7 @@
+Please find secret message from the iso linux image.
+image.zip
+
+秘密のメッセージをLinuxのisoイメージの中から見つけてください。
+image.zip
+
+

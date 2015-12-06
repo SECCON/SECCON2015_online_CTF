@@ -1,0 +1,13 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+#     
+diff = '''P©„~ö6³¸Aª wüY|œ†H$‹S>89s6‰´€ªîñÌ%lvoPRº‰‹Ù]:	wÄÌ÷ íî|KÊçVv1•(a}Ê#¦hW¸L®ıºà`Á÷òÀM!}²I/ßâ+…³tĞÏAub¤½
+–Ót±3ÓÙºKù¾'''
+same = '''P©„~ö6³¸Aª wüY|œH$‹S>89s6‰´€ªîñÌ%lvoPR:‰‹Ù]:	wÄÌ÷ ín|KÊçVv1•(a}Ê#¦hW¸L®}ºà`Á÷òÀM!}²I/ßâ+…³tĞÏAõb¤½
+–Ót±3ÓYºKù¾'''
+
+if (same == diff):
+    print "good"
+else:
+    print "evil"
+

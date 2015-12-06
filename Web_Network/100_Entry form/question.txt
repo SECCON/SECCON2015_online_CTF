@@ -1,0 +1,5 @@
+http://entryform.pwn.seccon.jp/register.cgi
+
+( Do not use your real mail address.)
+(登録情報に他人に知られたくないメールアドレスは使用しないでください)
+

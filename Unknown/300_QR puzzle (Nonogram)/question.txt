@@ -1,0 +1,2 @@
+Solve a puzzle 30 times
+http://qrlogic.pwn.seccon.jp:10080/game/

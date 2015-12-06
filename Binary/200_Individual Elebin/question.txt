@@ -1,0 +1,8 @@
+Execute all ELF files
+Individual_Elebin.zip
+
+
+すべてのELFファイルを実行せよ
+Individual_Elebin.zip
+
+

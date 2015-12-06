@@ -1,0 +1,9 @@
+What is your browser(User-Agent)?
+hakoniwaWebMail_20151124.zip 
+Requirement:.NET Framework 4.5 
+
+ブラウザの名称（User-Agent）を答えよ。
+hakoniwaWebMail_20151124.zip 
+必要環境.NET Framework 4.5
+
+

@@ -1,0 +1,10 @@
+We've found an encoder board using double 74HC161s along with a binary file.
+Please help us to decode it.
+gpio2.py
+encripted
+counterhardware.zip
+
+我々は2つの74HC161を使ったエンコーダーボードによるバイナリを入手した。
+復元を手伝ってほしい。
+gpio2.py
+encripted

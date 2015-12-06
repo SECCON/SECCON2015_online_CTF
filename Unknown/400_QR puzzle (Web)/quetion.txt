@@ -1,0 +1,2 @@
+Solve the slide puzzle and decode the QR code.
+http://puzzle.quals.seccon.jp:42213/slidepuzzle

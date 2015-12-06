@@ -1,0 +1,11 @@
+We've found some pictures of a decoder board and a program to produce a nice text.
+Please help us to get the text.
+gpio.py
+ChristmasIllumiations.zip
+
+私たちはデコーダーボードの写真と、すてきなテキストを生成するプログラムを入手した。
+解読のお手伝いをしてくれない？
+gpio.py
+ChristmasIllumiations.zip
+
+

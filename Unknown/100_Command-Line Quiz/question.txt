@@ -1,0 +1,12 @@
+telnet caitsith.pwn.seccon.jp
+User:root
+Password:seccon
+The goal is to find the flag word by "somehow" reading all *.txt files.
+
+
+telnet caitsith.pwn.seccon.jp
+User:root
+Password:seccon
+すべての *.txt ファイルを読め
+
+
